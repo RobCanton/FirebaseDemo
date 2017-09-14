@@ -17,7 +17,8 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addVerticalGradientLayer(withColorA: primaryColor, andColorB: secondaryColor)
+        // Add the background gradient
+        view.addVerticalGradientLayer(topColor: primaryColor, bottomColor: secondaryColor)
         
         // Do any additional setup after loading the view, typically from a nib.
     }

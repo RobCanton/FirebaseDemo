@@ -32,12 +32,19 @@ extension UIButton {
 }
 
 extension UIView {
-    func addVerticalGradientLayer(withColorA colorA:UIColor, andColorB colorB:UIColor) {
+    
+    /**
+     Adds a vertical gradient layer with two **UIColors** to the **UIView**.
+     - Parameter topColor: The top **UIColor**.
+     - Parameter bottomColor: The bottom **UIColor**.
+     */
+    
+    func addVerticalGradientLayer(topColor:UIColor, bottomColor:UIColor) {
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [
-            colorA.cgColor,
-            colorB.cgColor
+            topColor.cgColor,
+            bottomColor.cgColor
         ]
         gradient.locations = [0.0, 1.0]
         gradient.startPoint = CGPoint(x: 0, y: 0)

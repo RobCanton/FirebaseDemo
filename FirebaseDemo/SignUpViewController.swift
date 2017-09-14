@@ -11,18 +11,18 @@ import UIKit
 
 class SignUpViewController:UIViewController, UITextFieldDelegate {
     
-    var continueButton:RoundedWhiteButton!
-    var activityView:UIActivityIndicatorView!
-    
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var dismissButton: UIButton!
     
+    var continueButton:RoundedWhiteButton!
+    var activityView:UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addVerticalGradientLayer(withColorA: primaryColor, andColorB: secondaryColor)
+        view.addVerticalGradientLayer(topColor: primaryColor, bottomColor: secondaryColor)
         
         continueButton = RoundedWhiteButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
         continueButton.setTitleColor(secondaryColor, for: .normal)
@@ -79,6 +79,10 @@ class SignUpViewController:UIViewController, UITextFieldDelegate {
         self.dismiss(animated: false, completion: nil)
     }
     
+    /**
+     Adjusts the center of the **continueButton** above the keyboard.
+     - Parameter notification: Contains the keyboardFrame info.
+     */
     
     @objc func keyboardWillAppear(notification: NSNotification){
         
@@ -90,6 +94,12 @@ class SignUpViewController:UIViewController, UITextFieldDelegate {
         activityView.center = continueButton.center
     }
     
+    /**
+     Enables the continue button if the **username**, **email**, and **password** fields are all non-empty.
+     
+     - Parameter target: The targeted **UITextField**.
+     */
+    
     @objc func textFieldChanged(_ target:UITextField) {
         let username = usernameField.text
         let email = emailField.text
@@ -98,7 +108,12 @@ class SignUpViewController:UIViewController, UITextFieldDelegate {
         setContinueButton(enabled: formFilled)
     }
     
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+         // Resigns the target textField and assigns the next textField in the form.
+
         switch textField {
         case usernameField:
             usernameField.resignFirstResponder()
@@ -116,6 +131,10 @@ class SignUpViewController:UIViewController, UITextFieldDelegate {
         }
         return true
     }
+    
+    /**
+     Enables or Disables the **continueButton**.
+     */
     
     func setContinueButton(enabled:Bool) {
         if enabled {
